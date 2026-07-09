@@ -30,48 +30,48 @@ struct time {
     bool operator>=(const time &rhs) const { return ns >= rhs.ns; }
 };
 
-OX_FORCE_CONSTEXPR OX_INLINE time seconds(time_t s) {
+OX_FORCE_CONSTEXPR  time seconds(const time_t s) {
     return {static_cast<time_t>(s * 1000000000LL)};
 }
-OX_FORCE_CONSTEXPR OX_INLINE timec_t seconds(const time &s) {
+OX_FORCE_CONSTEXPR  timec_t seconds(const time &s) {
     return static_cast<timec_t>(s.ns) / 1000000000.0f;
 }
 
-OX_FORCE_CONSTEXPR OX_INLINE time milliseconds(const time_t ms) {
+OX_FORCE_CONSTEXPR  time milliseconds(const time_t ms) {
     return {static_cast<time_t>(ms * 1000000LL)};
 }
-OX_FORCE_CONSTEXPR OX_INLINE timec_t milliseconds(const time &ms) {
+OX_FORCE_CONSTEXPR  timec_t milliseconds(const time &ms) {
     return static_cast<timec_t>(ms.ns) / 1000000.0f;
 }
 
-OX_FORCE_CONSTEXPR OX_INLINE time microseconds(const time_t us) {
+OX_FORCE_CONSTEXPR  time microseconds(const time_t us) {
     return {static_cast<time_t>(us * 1000LL)};
 }
-OX_FORCE_CONSTEXPR OX_INLINE timec_t microseconds(const time &us) {
+OX_FORCE_CONSTEXPR  timec_t microseconds(const time &us) {
     return static_cast<timec_t>(us.ns) / 1000.0f;
 }
 
-OX_FORCE_CONSTEXPR OX_INLINE time nanoseconds(const time_t ns) { return {ns}; }
-OX_FORCE_CONSTEXPR OX_INLINE timec_t nanoseconds(const time &ns) {
+OX_FORCE_CONSTEXPR  time nanoseconds(const time_t ns) { return {ns}; }
+OX_FORCE_CONSTEXPR  timec_t nanoseconds(const time &ns) {
     return static_cast<timec_t>(ns.ns);
 }
 
-OX_FORCE_CONSTEXPR OX_INLINE time operator-(const time &a, const time &b) {
+OX_FORCE_CONSTEXPR  time operator-(const time &a, const time &b) {
     return {a.ns - b.ns};
 }
-OX_FORCE_CONSTEXPR OX_INLINE time operator+(const time &a, const time &b) {
+OX_FORCE_CONSTEXPR  time operator+(const time &a, const time &b) {
     return {a.ns + b.ns};
 }
-OX_FORCE_CONSTEXPR OX_INLINE time operator*(const time &a, const i64 scalar) {
+OX_FORCE_CONSTEXPR  time operator*(const time &a, const i64 scalar) {
     return {a.ns * scalar};
 }
-OX_FORCE_CONSTEXPR OX_INLINE time operator/(const time &a, const i64 scalar) {
+OX_FORCE_CONSTEXPR  time operator/(const time &a, const i64 scalar) {
     return {a.ns / scalar};
 }
-OX_FORCE_CONSTEXPR OX_INLINE time operator*(const i64 scalar, const time &a) {
+OX_FORCE_CONSTEXPR  time operator*(const i64 scalar, const time &a) {
     return {a.ns * scalar};
 }
-OX_FORCE_CONSTEXPR OX_INLINE time operator/(const i64 scalar, const time &a) {
+OX_FORCE_CONSTEXPR  time operator/(const i64 scalar, const time &a) {
     return {scalar / a.ns};
 }
 
