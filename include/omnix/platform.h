@@ -15,7 +15,6 @@
 #include "platform/date.h"
 #include "platform/defines.h"
 #include "platform/detect.h"
-#include "platform/file.h"
 #include "platform/macros.h"
 #include "platform/memory.h"
 #include "platform/opaque.h"

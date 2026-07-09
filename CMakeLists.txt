@@ -8,7 +8,6 @@ add_library(omnix_platform
 
 if(UNIX)
     target_sources(omnix_platform PRIVATE
-            src/linux/file.linux.cpp
             src/linux/time.linux.cpp
             src/linux/memory.linux.cpp
             src/linux/assert.linux.cpp
@@ -19,9 +18,5 @@ if(UNIX)
 elseif(WIN32)
     #implement
 endif()
-
-target_sources(omnix_platform PRIVATE
-        src/file.cpp
-)
 
 target_include_directories(omnix_platform PUBLIC include)
