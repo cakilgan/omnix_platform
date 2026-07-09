@@ -9,7 +9,6 @@ add_library(omnix_platform
 if(UNIX)
     target_sources(omnix_platform PRIVATE
             src/linux/time.linux.cpp
-            src/linux/memory.linux.cpp
             src/linux/assert.linux.cpp
             src/linux/crash.linux.cpp
             src/linux/date.linux.cpp
