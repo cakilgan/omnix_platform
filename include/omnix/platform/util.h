@@ -95,41 +95,13 @@ template <typename T> OX_FORCE_CONSTEXPR bytes size_of() {
 OX_FORCE_CONSTEXPR bool in_btw(const i64 x, const i64 start, const i64 end) {
     return x >= start && x <= end;
 }
-OX_FORCE_CONSTEXPR bool in_btw(const loc x, const loc start, const loc end) {
-    return x >= start && x <= end;
-}
 
 OX_FORCE_CONSTEXPR bool contains(const i64 x, const i64 y, const i64 start,
                                  const i64 end) {
     return x <= start && y >= end;
 }
-OX_FORCE_CONSTEXPR bool contains(const loc x, const loc y, const loc start,
-                                 const loc end) {
-    return x <= start && y >= end;
-}
 
-OX_FORCE_CONSTEXPR OX_INLINE sloc operator-(loc a, loc b) {
-    OX_ASSERT(a.value <= static_cast<u64>(i64_max));
-    OX_ASSERT(b.value <= static_cast<u64>(i64_max));
-    return sloc{static_cast<i64>(a.value) - static_cast<i64>(b.value)};
-}
-OX_FORCE_CONSTEXPR OX_INLINE bytes bytes_between(loc a, loc b) {
-    return bytes(a.value > b.value ? a.value - b.value : b.value - a.value);
-}
 
-OX_FORCE_CONSTEXPR OX_INLINE loc operator+(loc l, sloc off) {
-    if (off.value >= 0) {
-        OX_ASSERT(static_cast<u64>(off.value) <= (u64_max - l.value));
-        return loc{l.value + static_cast<u64>(off.value)};
-    } else {
-        const u64 neg = static_cast<u64>(-off.value);
-        OX_ASSERT(l.value >= neg);
-        return loc{l.value - neg};
-    }
-}
-OX_FORCE_CONSTEXPR OX_INLINE loc operator-(loc l, sloc off) {
-    return l + sloc{-off.value};
-}
 
 } // namespace ox
 #endif // OMNIX_UTIL_H

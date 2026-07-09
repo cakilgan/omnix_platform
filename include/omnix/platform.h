@@ -16,7 +16,6 @@
 #include "platform/defines.h"
 #include "platform/detect.h"
 #include "platform/macros.h"
-#include "platform/opaque.h"
 #include "platform/result.h"
 #include "platform/time.h"
 #include "platform/types.h"

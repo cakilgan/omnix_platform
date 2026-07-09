@@ -15,7 +15,6 @@
 #include "../platform/assert.h"
 #include "constants.h"
 #include "defines.h"
-#include "loc.h"
 #include "types.h"
 
 namespace ox {
@@ -51,7 +50,6 @@ struct bytes {
 
     OX_FORCE_CONSTEXPR bytes() : ct(0) {}
     explicit OX_FORCE_CONSTEXPR bytes(bytes_t b) : ct(b) {}
-    explicit OX_FORCE_CONSTEXPR bytes(loc b) : ct(b.value) {}
 
     OX_FORCE_CONSTEXPR bool operator==(const bytes &rhs) const {
         return ct == rhs.ct;
@@ -147,23 +145,6 @@ OX_FORCE_CONSTEXPR OX_INLINE const byte *operator+(const byte *ptr,
 OX_FORCE_CONSTEXPR OX_INLINE const byte *operator-(const byte *ptr,
                                                    const bytes &add) {
     return ptr - add.ct;
-}
-
-OX_FORCE_CONSTEXPR OX_INLINE loc operator+(loc l, const bytes &b) {
-    OX_ASSERT(b.ct <= (u64_max - l.value));
-    return loc{l.value + b.ct};
-}
-OX_FORCE_CONSTEXPR OX_INLINE loc operator-(loc l, const bytes &b) {
-    OX_ASSERT(l.value >= b.ct);
-    return loc{l.value - b.ct};
-}
-OX_FORCE_CONSTEXPR loc &operator+=(loc &l, const bytes &b) {
-    l = l + b;
-    return l;
-}
-OX_FORCE_CONSTEXPR loc &operator-=(loc &l, const bytes &b) {
-    l = l - b;
-    return l;
 }
 
 namespace literals {
