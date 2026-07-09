@@ -1,5 +1,5 @@
-project(omnix_platform)
 cmake_minimum_required(VERSION 4.1)
+project(omnix_platform)
 
 add_library(omnix_platform
         src/platform.cpp
