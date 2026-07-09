@@ -20,6 +20,5 @@
 #include "platform/time.h"
 #include "platform/types.h"
 #include "platform/util.h"
-#include "platform/vfs.h"
 
 #endif // OMNIX_OMNIX_PLATFORM_H

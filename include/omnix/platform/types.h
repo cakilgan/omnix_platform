@@ -54,9 +54,6 @@ OX_USING(f128, long double);
 OX_USING(usize, u64);
 OX_USING(isize, i64);
 
-struct loc;
-struct sloc;
-
 OX_USING(basic_byte, u8);
 OX_USING(cstr, const char *);
 OX_USING(cchar, const char);
@@ -92,9 +89,6 @@ template <typename T> constexpr type_id type_of() {
 }
 template <typename T> type_id type_of(const T &_) { return type_of<T>(); }
 
-struct opaque;
-using opq = opaque;
-
 template <typename T = void> constexpr T *null = nullptr;
 } // namespace types
 
@@ -118,9 +112,6 @@ using types::f64;
 using types::isize;
 using types::usize;
 
-using types::loc;
-using types::sloc;
-
 using types::arrstr;
 using types::basic_byte;
 using types::cstr;
@@ -130,9 +121,6 @@ using types::cchar;
 using types::cvptr;
 using types::vptr;
 using types::vptrc;
-
-using types::opaque;
-using types::opq;
 
 using types::null;
 } // namespace ox
