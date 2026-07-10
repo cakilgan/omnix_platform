@@ -2,7 +2,7 @@
 #define OMNIX_LITERALS_H
 // OXL_BYTE,OXL_TIME
 #include "byte.h"
-#include "time.h"
+#include "time/time.h"
 
 #ifdef OXL_BYTE
 using ox::literals::operator""_gb;
