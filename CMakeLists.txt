@@ -12,6 +12,7 @@ if(UNIX)
             src/linux/assert.linux.cpp
             src/linux/crash.linux.cpp
             src/linux/date.linux.cpp
+            src/linux/memory.linux.cpp
     )
     target_link_libraries(omnix_platform PUBLIC xcb)
 elseif(WIN32)
