@@ -78,6 +78,7 @@ namespace err {
 OX_RESULT(results, null_pointer);
 OX_RESULT(results, invalid_parameter);
 OX_RESULT(results, invalid_handle);
+OX_RESULT(results, unsupported);
 } // namespace err
 }; // namespace results
 
