@@ -48,6 +48,6 @@ extern assert_handler g_assert_handler;
 
 // it is not an error code.
 // if you dont want to write OX_ASSERT_MSG(false,"message")
-#define OX_FAIL(msg) OX_ASSERT_MSG(false, msg)
+#define OX_FAIL(msg) OX_ASSERT_MSG(false && "used OX_FAIL", msg)
 
 #endif // OMNIX_ASSERT_H
