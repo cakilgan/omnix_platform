@@ -4,7 +4,7 @@
 
 #ifndef OMNIX_PLATFORM_TIMER_H
 #define OMNIX_PLATFORM_TIMER_H
-#include "time.h"
+#include "../time/time.h"
 namespace ox {
     template<typename Clock = clocks::monotonic>
     struct timer {
