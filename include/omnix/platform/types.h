@@ -59,9 +59,6 @@ OX_USING(cstr, const char *);
 OX_USING(cchar, const char);
 OX_USING(dstr, char *);
 OX_USING(arrstr, char **);
-OX_USING(vptr, void *);
-OX_USING(cvptr, const void *);
-OX_USING(vptrc, void *const);
 
 using type_id = u64;
 namespace impl {
@@ -89,7 +86,6 @@ template <typename T> constexpr type_id type_of() {
 }
 template <typename T> type_id type_of(const T &_) { return type_of<T>(); }
 
-template <typename T = void> constexpr T *null = nullptr;
 } // namespace types
 
 using types::i16;
@@ -118,11 +114,6 @@ using types::cstr;
 using types::dstr;
 
 using types::cchar;
-using types::cvptr;
-using types::vptr;
-using types::vptrc;
-
-using types::null;
 } // namespace ox
 
 OX_STATIC_ASSERT(sizeof(::ox::i8) == 1,
