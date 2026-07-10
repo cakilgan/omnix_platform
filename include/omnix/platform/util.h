@@ -59,10 +59,7 @@ constexpr _Tp &&forward(typename remove_reference<_Tp>::type &&__t) noexcept {
     return static_cast<_Tp &&>(__t);
 }
 
-template <typename T> T *safe(T *check) {
-    OX_CHECK(check != nullptr);
-    return check;
-}
+
 
 template <typename T> T unchecked(result<T> _result) {
     OX_ASSERT(_result);
