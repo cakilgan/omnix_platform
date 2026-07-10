@@ -5,9 +5,9 @@
 #ifndef OMNIX_TIME_H
 #define OMNIX_TIME_H
 
-#include "defines.h"
-#include "result.h"
-#include "types.h"
+#include "../defines.h"
+#include "../result.h"
+#include "../types.h"
 
 namespace ox {
 OX_RESULT_CATEGORY(time, -54000);

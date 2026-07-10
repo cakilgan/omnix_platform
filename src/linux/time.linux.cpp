@@ -4,7 +4,7 @@
 
 #include <cerrno>
 #include <ctime>
-#include <omnix/platform/time.h>
+#include <omnix/platform/time/time.h>
 
 #include "omnix/platform/result.h"
 #include <new>

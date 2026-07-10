@@ -4,9 +4,9 @@
 
 #ifndef OMNIX_DATE_H
 #define OMNIX_DATE_H
-#include "../platform/time.h"
-#include "defines.h"
-#include "types.h"
+#include "time.h"
+#include "../defines.h"
+#include "../types.h"
 
 namespace ox {
     OX_USING(date_t, i32);
