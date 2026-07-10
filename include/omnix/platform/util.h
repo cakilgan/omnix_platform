@@ -64,25 +64,10 @@ template <typename T> T *safe(T *check) {
     return check;
 }
 
-template <typename T> constexpr usize strlen(const T *str) {
-    usize count = 0;
-    while (str[count] != T(0))
-        count++;
-    return count;
-}
-
-// DANGEROUS
-// basically just ignores result code and assumes value() is valid and moves it.
-// NOTE: makes assertion for debug mode.
 template <typename T> T unchecked(result<T> _result) {
     OX_ASSERT(_result);
     return ox::move(_result.value());
 }
-
-// DANGEROUS
-// like unchecked(result<T>) but it takes just error codes
-// this is for operations that return result_t rather than result<T>
-// NOTE: makes assertion for debug mode.
 OX_INLINE void unchecked(const result_t _result) { OX_ASSERT(_result == ok); }
 
 template <typename T> OX_FORCE_CONSTEXPR bytes size_of(const T &obj) {
@@ -91,16 +76,12 @@ template <typename T> OX_FORCE_CONSTEXPR bytes size_of(const T &obj) {
 template <typename T> OX_FORCE_CONSTEXPR bytes size_of() {
     return bytes{sizeof(T)};
 }
-
-OX_FORCE_CONSTEXPR bool in_btw(const i64 x, const i64 start, const i64 end) {
-    return x >= start && x <= end;
+template <typename T> OX_FORCE_CONSTEXPR bytes align_of(const T &obj) {
+    return bytes(alignof(T));
 }
-
-OX_FORCE_CONSTEXPR bool contains(const i64 x, const i64 y, const i64 start,
-                                 const i64 end) {
-    return x <= start && y >= end;
+template <typename T> OX_FORCE_CONSTEXPR bytes align_of() {
+    return bytes{alignof(T)};
 }
-
 
 
 } // namespace ox
