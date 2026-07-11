@@ -15,11 +15,15 @@
 #include "platform/defines.h"
 #include "platform/detect.h"
 #include "platform/macros.h"
+#include "platform/types.h"
 #include "platform/result.h"
+#include "platform/util.h"
 #include "platform/time/time.h"
 #include "platform/time/timer.h"
 #include "platform/time/date.h"
-#include "platform/types.h"
-#include "platform/util.h"
+#include "platform/memory/pointer.h"
+#include "platform/memory/memory.h"
+#include "platform/memory/alloc.h"
+#include "platform/memory/allocator.h"
 
 #endif // OMNIX_OMNIX_PLATFORM_H
