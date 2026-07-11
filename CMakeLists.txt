@@ -20,3 +20,6 @@ elseif(WIN32)
 endif()
 
 target_include_directories(omnix_platform PUBLIC include)
+
+set(OMNIX_PLATFORM_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
+set(OMNIX_PLATFORM_SOURCE_DIR  "${PROJECT_SOURCE_DIR}/src")
