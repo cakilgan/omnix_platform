@@ -4,8 +4,7 @@
 
 #ifndef OMNIX_PLATFORM_POINTER_H
 #define OMNIX_PLATFORM_POINTER_H
-#include <bits/stdint-uintn.h>
-
+#include "omnix/platform/types.h"
 namespace ox {
     namespace mem {
         template<typename T>

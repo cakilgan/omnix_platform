@@ -7,6 +7,7 @@
 #include <utility>
 
 #include "omnix/platform/result.h"
+#include "memory.h"
 
 namespace ox {
     struct allocator {

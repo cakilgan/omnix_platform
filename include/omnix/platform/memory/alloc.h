@@ -10,6 +10,7 @@
 #include "../result.h"
 #include "../byte.h"
 #include "memory.h"
+#include <cstddef>
 
 namespace ox {
     OX_RESULT_CATEGORY(memory,51000);
