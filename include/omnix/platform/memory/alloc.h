@@ -23,26 +23,42 @@ namespace ox {
         constexpr auto default_alignment = bytes(alignof(std::max_align_t));
         constexpr auto no_alignment = bytes(u64_max);
 
-        result<memory> malloc(bytes size,bytes alignment = default_alignment);
+        result<memory> alloc_as_memory(bytes size,bytes alignment = default_alignment);
         result_t free(memory& mem,bytes alignment = no_alignment);
+        result<vptr> alloc(bytes size,bytes alignment = default_alignment);
+        result_t free(vptr& ptr);
 
-        result<memory> vmalloc(bytes size);
+        result<memory> valloc_as_memory(bytes size);
         result_t vfree(memory& mem);
+        result<vptr> valloc(bytes size);
+        result_t vfree(vptr& ptr,bytes size);
+
+        result<memory> realloc_as_memory(memory& mem,bytes new_size) {
+            return results::err::unsupported;
+        }
+        result<vptr> realloc(vptr& ptr,bytes new_size) {
+            return results::err::unsupported;
+        }
 
         template<typename T>
-        result<pointer<T>> single_malloc() {
-            auto mem = malloc(size_of<T>(),align_of<T>());
+        result<pointer<T>> single_alloc() {
+            auto mem = alloc_as_memory(size_of<T>(),align_of<T>());
             if (!mem) return {mem.err()};
             return {static_cast<T*>(mem.value().pointer.get())};
         }
     }
 
-    using mem::malloc;
+    using mem::alloc;
+    using mem::alloc_as_memory;
     using mem::free;
 
-    using mem::vmalloc;
+    using mem::valloc;
+    using mem::valloc_as_memory;
     using mem::vfree;
 
-    using mem::single_malloc;
+    using mem::realloc;
+    using mem::realloc_as_memory;
+
+    using mem::single_alloc;
 }
 #endif //OMNIX_PLATFORM_ALLOC_H
