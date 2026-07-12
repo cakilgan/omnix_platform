@@ -5,6 +5,7 @@
 #ifndef OMNIX_PLATFORM_POINTER_H
 #define OMNIX_PLATFORM_POINTER_H
 #include "omnix/platform/types.h"
+#include <cstddef>
 namespace ox {
     namespace mem {
         template<typename T>
@@ -13,44 +14,107 @@ namespace ox {
             pointer(const pointer& copy) = default;
             pointer& operator=(const pointer& copy) = default;
 
-            pointer(pointer&& o) noexcept :raw(o.raw){o.raw = nullptr;}
-            pointer& operator=(pointer&& o)  noexcept {
-                raw = o.raw;
-                o.raw = nullptr;
-                return *this;
-            }
+            pointer(pointer&&) noexcept = default;
+            pointer& operator=(pointer&&) noexcept = default;
 
-            T& operator*() const {
+            constexpr T& operator*() const noexcept{
                 return *raw;
             }
-            T* operator->() const {
+            constexpr T* operator->() const noexcept{
+                return raw;
+            }
+            constexpr T* get() const noexcept{
                 return raw;
             }
 
-            constexpr T* get() const {
-                return raw;
-            }
-            constexpr operator void*() const {
-                return get();
-            }
-
-            pointer operator+(usize count) {
+            pointer operator+(usize count) const noexcept{
                 return {this->get() + count};
             }
-            pointer& operator+=(usize count) {
+            friend constexpr pointer operator+(usize n, pointer p) noexcept{
+                return p + n;
+            }
+            pointer& operator+=(usize count) noexcept{
                 raw = this->get() + count;
                 return *this;
             }
-            pointer operator-(usize count) {
+            pointer operator-(usize count) const noexcept{
                 return {this->get() - count};
             }
-            pointer& operator-=(usize count) {
+            pointer& operator-=(usize count) noexcept{
                 raw = this->get() - count;
                 return *this;
             }
 
-            T& operator[](usize index) {
+            constexpr pointer& operator++() noexcept {
+                ++raw;
+                return *this;
+            }
+            constexpr pointer operator++(int) noexcept {
+                pointer tmp(*this);
+                ++(*this);
+                return tmp;
+            }
+            constexpr pointer& operator--() noexcept {
+                --raw;
+                return *this;
+            }
+            constexpr pointer operator--(int) noexcept {
+                pointer tmp(*this);
+                --(*this);
+                return tmp;
+            }
+
+            constexpr T& operator[](usize index) noexcept{
                 return raw[index];
+            }
+            constexpr const T& operator[](usize index) const noexcept{
+                return raw[index];
+            }
+
+            constexpr explicit operator bool() const { return raw != nullptr; }
+
+            constexpr isize operator-(pointer other) const noexcept{
+                return raw - other.raw;
+            }
+
+
+            friend constexpr bool operator<(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw < rhs.raw;
+            }
+            friend constexpr bool operator<=(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw <= rhs.raw;
+            }
+            friend constexpr bool operator>(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw > rhs.raw;
+            }
+            friend constexpr bool operator>=(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw >= rhs.raw;
+            }
+
+            friend constexpr bool operator==(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw == rhs.raw;
+            }
+            friend constexpr bool operator!=(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw != rhs.raw;
+            }
+
+            friend constexpr bool operator==(pointer a, std::nullptr_t) noexcept{
+                return a.raw == nullptr;
+            }
+            friend constexpr bool operator!=(pointer a, std::nullptr_t) noexcept{
+                return a.raw != nullptr;
+            }
+            friend constexpr bool operator==(std::nullptr_t, pointer p) noexcept {
+                return p.raw == nullptr;
+            }
+            friend constexpr bool operator!=(std::nullptr_t, pointer p) noexcept {
+                return p.raw != nullptr;
+            }
+
+            friend constexpr void swap(pointer& a, pointer& b) noexcept {
+                const auto tmp = a.raw;
+                a.raw = b.raw;
+                b.raw = tmp;
             }
         private:
             T *raw;
@@ -61,18 +125,52 @@ namespace ox {
             constexpr pointer(void* from = nullptr):raw(from){}
             pointer(const pointer& copy) = default;
             pointer& operator=(const pointer& copy) = default;
-            pointer(pointer&& o) noexcept :raw(o.raw){o.raw = nullptr;}
-            pointer& operator=(pointer&& o)  noexcept {
-                raw = o.raw;
-                o.raw = nullptr;
-                return *this;
-            }
+            pointer(pointer&& o) noexcept = default;
+            pointer& operator=(pointer&& o)  noexcept = default;
 
             constexpr void* get() const {
                 return raw;
             }
-            constexpr operator void*() const {
-                return get();
+
+            constexpr explicit operator bool() const { return raw != nullptr; }
+
+            friend constexpr bool operator<(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw < rhs.raw;
+            }
+            friend constexpr bool operator<=(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw <= rhs.raw;
+            }
+            friend constexpr bool operator>(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw > rhs.raw;
+            }
+            friend constexpr bool operator>=(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw >= rhs.raw;
+            }
+
+            friend constexpr bool operator==(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw == rhs.raw;
+            }
+            friend constexpr bool operator!=(pointer lhs, pointer rhs) noexcept{
+                return lhs.raw != rhs.raw;
+            }
+
+            friend constexpr bool operator==(pointer a, std::nullptr_t) noexcept{
+                return a.raw == nullptr;
+            }
+            friend constexpr bool operator!=(pointer a, std::nullptr_t) noexcept{
+                return a.raw != nullptr;
+            }
+            friend constexpr bool operator==(std::nullptr_t, pointer p) noexcept {
+                return p.raw == nullptr;
+            }
+            friend constexpr bool operator!=(std::nullptr_t, pointer p) noexcept {
+                return p.raw != nullptr;
+            }
+
+            friend constexpr void swap(pointer& a, pointer& b) noexcept {
+                const auto tmp = a.raw;
+                a.raw = b.raw;
+                b.raw = tmp;
             }
         private:
             void* raw;
@@ -86,15 +184,17 @@ namespace ox {
 
         template <typename T = void> constexpr ptr<T> null = nullptr;
 
-        template<typename T,typename U>
-        pointer<T> cast(const pointer<U>& other) {
-            return {static_cast<T*>(other.get())};
+        template<typename T, typename U>
+        constexpr pointer<T> cast(pointer<U> other) noexcept {
+            return {reinterpret_cast<T*>(other.get())};
         }
 
         template <typename T> pointer<T> safe(pointer<T> check) {
             OX_CHECK(check != nullptr);
             return check;
         }
+
+
     }
 
     using mem::pointer;
@@ -105,7 +205,6 @@ namespace ox {
     using mem::null;
     using mem::cast;
     using mem::safe;
-
-
 }
+
 #endif //OMNIX_PLATFORM_POINTER_H
