@@ -4,7 +4,7 @@
 
 #ifndef OMNIX_PLATFORM_POINTER_H
 #define OMNIX_PLATFORM_POINTER_H
-#include "omnix/platform/types.h"
+#include "../types.h"
 #include <cstddef>
 namespace ox {
     namespace mem {
@@ -116,7 +116,7 @@ namespace ox {
                 a.raw = b.raw;
                 b.raw = tmp;
             }
-        private:
+        protected:
             T *raw;
         };
 
@@ -182,11 +182,19 @@ namespace ox {
         using cvptr = const vptr;
         using vptrc = vptr const;
 
-        template <typename T = void> constexpr ptr<T> null = nullptr;
+        template <typename T = void> constexpr pointer<T> null = nullptr;
 
         template<typename T, typename U>
         constexpr pointer<T> cast(pointer<U> other) noexcept {
             return {reinterpret_cast<T*>(other.get())};
+        }
+        template<typename T, typename U>
+        constexpr pointer<T> cast_s(pointer<U> other) noexcept {
+            return {static_cast<T*>(other.get())};
+        }
+        template<typename T>
+        constexpr pointer<void> vcast(pointer<T> other) noexcept {
+            return cast_s<void>(other);
         }
 
         template <typename T> pointer<T> safe(pointer<T> check) {
@@ -204,6 +212,8 @@ namespace ox {
     using mem::vptrc;
     using mem::null;
     using mem::cast;
+    using mem::cast_s;
+    using mem::vcast;
     using mem::safe;
 }
 
