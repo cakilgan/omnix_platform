@@ -15,7 +15,7 @@ namespace ox {
 
         template<typename T>
         pointer<T> as(memory& mem) {
-            return static_cast<T*>(mem.pointer.get());
+            return cast<T>(mem.pointer);
         }
 
         constexpr memory slice(const memory& mem,const bytes offset, bytes length){
