@@ -33,10 +33,11 @@ namespace ox {
         result<vptr> valloc(bytes size);
         result_t vfree(vptr& ptr,bytes size);
 
-        result<memory> realloc_as_memory(memory& mem,bytes new_size) {
+        inline result<memory> realloc_as_memory(memory& mem,bytes new_size) {
             return results::err::unsupported;
         }
-        result<vptr> realloc(vptr& ptr,bytes new_size) {
+
+        inline result<vptr> realloc(vptr& ptr,bytes new_size) {
             return results::err::unsupported;
         }
 
