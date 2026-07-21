@@ -26,6 +26,11 @@ namespace ox {
             constexpr T* get() const noexcept{
                 return raw;
             }
+            constexpr T* release() noexcept {
+                T* tmp = raw;
+                raw = nullptr;
+                return tmp;
+            }
 
             pointer operator+(usize count) const noexcept{
                 return {this->get() + count};
@@ -112,6 +117,7 @@ namespace ox {
             }
 
             friend constexpr void swap(pointer& a, pointer& b) noexcept {
+                if (a.raw == b.raw) return;
                 const auto tmp = a.raw;
                 a.raw = b.raw;
                 b.raw = tmp;

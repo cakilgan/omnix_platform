@@ -49,8 +49,12 @@ namespace ox {
     protected:
         memory region;
     public:
-        explicit region_allocator(memory region)
-            : region(std::move(region)) {}
+        void set_memory(const memory& mem) {
+            region = mem;
+        }
+        memory& get_memory() {
+            return region;
+        }
     };
 }
 #endif //OMNIX_PLATFORM_ALLOCATOR_H

@@ -43,9 +43,11 @@ namespace ox {
 
         template<typename T>
         result<pointer<T>> single_alloc() {
-            auto mem = alloc_as_memory(size_of<T>(),align_of<T>());
-            if (!mem) return {mem.err()};
-            return {static_cast<T*>(mem.value().pointer.get())};
+            return alloc(size_of<T>(),align_of<T>());
+        }
+        template<typename T>
+        result<memory> single_alloc_as_memory() {
+            return alloc_as_memory(size_of<T>(),align_of<T>());
         }
     }
 
@@ -61,5 +63,6 @@ namespace ox {
     using mem::realloc_as_memory;
 
     using mem::single_alloc;
+    using mem::single_alloc_as_memory;
 }
 #endif //OMNIX_PLATFORM_ALLOC_H
