@@ -60,32 +60,6 @@ OX_USING(cchar, const char);
 OX_USING(dstr, char *);
 OX_USING(arrstr, char **);
 
-using type_id = u64;
-namespace impl {
-inline u64 next_type_id() {
-    static u64 counter = 0;
-    return ++counter;
-}
-template <typename T> constexpr u64 type_name_hash() {
-#if OX_IS(COMPILER, CLANG) || OX_IS(COMPILER, GCC)
-    constexpr auto name = __PRETTY_FUNCTION__;
-#elif OX_IS(COMPILER, MSVC)
-    constexpr auto name = __FUNCSIG__;
-#endif
-    u64 hash = 14695981039346656037ULL;
-    for (usize i = 0; name[i] != '\0'; ++i) {
-        hash ^= static_cast<u64>(name[i]);
-        hash *= 1099511628211ULL;
-    }
-    return hash;
-}
-}; // namespace impl
-
-template <typename T> constexpr type_id type_of() {
-    return impl::type_name_hash<T>();
-}
-template <typename T> type_id type_of(const T &_) { return type_of<T>(); }
-
 } // namespace types
 
 using types::i16;
