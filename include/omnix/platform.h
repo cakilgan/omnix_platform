@@ -16,6 +16,7 @@
 #include "platform/detect.h"
 #include "platform/macros.h"
 #include "platform/types.h"
+#include "platform/typeid.h"
 #include "platform/result.h"
 #include "platform/util.h"
 #include "platform/time/time.h"
