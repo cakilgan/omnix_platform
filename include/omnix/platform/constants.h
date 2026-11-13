@@ -1,5 +1,5 @@
-#ifndef OMNIX_CONSTANTS_H
-#define OMNIX_CONSTANTS_H
+#ifndef OMNIX_PLATFORM_CONSTANTS_H
+#define OMNIX_PLATFORM_CONSTANTS_H
 
 #include "defines.h"
 #include "types.h"
@@ -40,4 +40,4 @@ using ::ox::constants::i64_min;
 using ::ox::constants::i8_min;
 } // namespace ox
 
-#endif // OMNIX_CONSTANTS_H
+#endif // OMNIX_PLATFORM_CONSTANTS_H

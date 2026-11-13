@@ -90,7 +90,15 @@ using results::ok;
     if (x) {                                                                   \
         y                                                                      \
     }
+#define OX_VIFRESULT(x) \
+        OX_IFRESULT(const auto res_ = x; res_!=::ox::ok, return res_;);
+
 
 #define OX_RRESULT(x) OX_IFRESULT(!x, return x.err();)
+#define OX_RRESULTV(x,name) OX_IFRESULT(!x, return x.err();) auto name = x.value()
+#define OX_NRRESULTV(name,x) \
+        const auto name##r = x;\
+        OX_RRESULTV(name##r,name)
+
 
 #endif // OMNIX_RESULT_H
